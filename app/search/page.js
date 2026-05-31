@@ -30,7 +30,7 @@ export default async function SearchPage({ searchParams }) {
 
       {/* RIGHT */}
       <div className="hidden lg:block w-1/2 h-full sticky top-0">
-        <Map properties={properties} />
+        {/* <Map properties={properties} /> */}
       </div>
     </div>
   );
