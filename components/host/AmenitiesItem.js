@@ -1,4 +1,8 @@
-export default function AmenitiesItem({ amenity }) {
+export default function AmenitiesItem({
+  amenity,
+  selectedAmenities,
+  onToggle,
+}) {
   return (
     <label
       key={amenity.id}
@@ -6,8 +10,8 @@ export default function AmenitiesItem({ amenity }) {
     >
       <input
         type="checkbox"
-        // checked={selectedAmenities.includes(amenity.id)}
-        // onChange={() => toggleAmenity(amenity.id)}
+        checked={selectedAmenities.includes(amenity.id)}
+        onChange={() => onToggle(amenity.id)}
       />
 
       <span>{amenity.name}</span>

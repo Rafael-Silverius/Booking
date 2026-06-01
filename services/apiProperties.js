@@ -110,8 +110,13 @@ export async function getPropertiesByOwnerId(owner_id) {
         check_in,
         check_out,
         status,
-        guest_id
-      )
+        guest_id,
+        profiles:guest_id (
+          full_name
+        )
+
+    )
+
     `
     )
     .eq("owner_id", owner_id);
@@ -128,7 +133,8 @@ export async function createProperty(property) {
   const { data, error } = await supabase
     .from("properties")
     .insert([property])
-    .select();
+    .select()
+    .single();
 
   if (error) {
     console.error("Supabase error:", error.message);

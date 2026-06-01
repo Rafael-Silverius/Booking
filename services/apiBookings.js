@@ -94,3 +94,20 @@ export async function getBookingsByOwnerId(owner_id) {
 
   return data;
 }
+
+export async function updateStatusBooking(bookingId, status) {
+  if (!bookingId) throw new Error("Missing bookingId");
+
+  const allowedStatuses = ["pending", "confirmed", "cancelled", "completed"];
+
+  if (!allowedStatuses.includes(status)) {
+    throw new Error("Invalid status");
+  }
+
+  return supabase
+    .from("bookings")
+    .update({ status })
+    .eq("id", bookingId)
+    .select()
+    .single();
+}

@@ -1,7 +1,20 @@
 import { deleteProperty } from "@/services/apiProperties";
+import { toast } from "sonner";
 
 export default function OwnersPropertyCard({ property, setModal, onSuccess }) {
   const handleDelete = async () => {
+    const hasActiveBookings = property.bookings.some(
+      (b) => b.status === "pending" || b.status === "confirmed"
+    );
+
+    if (hasActiveBookings) {
+      toast.error(
+        "This property cannot be deleted because it has active bookings.",
+        { position: "top-center" }
+      );
+      return;
+    }
+
     if (!window.confirm("Delete this property?")) return;
 
     try {
@@ -10,8 +23,11 @@ export default function OwnersPropertyCard({ property, setModal, onSuccess }) {
     } catch (err) {
       console.error(err);
       alert("Failed to delete property");
+      toast.error(err, { position: "top-center" });
     }
   };
+
+  console.log(property);
 
   return (
     <div className="border rounded-2xl p-4 flex items-center gap-4">
@@ -23,7 +39,6 @@ export default function OwnersPropertyCard({ property, setModal, onSuccess }) {
       <div className="flex-1">
         <h3 className="font-bold text-lg">{property.title}</h3>
         <small className="text-gray-600">{property.small_title}</small>
-        {/* {console.log(property)} */}
 
         <p className="text-gray-500">
           {property.city}, {property.country}

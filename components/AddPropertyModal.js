@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { createProperty, updateProperty } from "@/services/apiProperties";
 import ModalFormField from "./ModalFormField";
 import AmenitiesItem from "./host/AmenitiesItem";
+import { updatePropertyAmenities } from "@/services/apiAmenities";
 
 const emptyForm = {
   title: "",
@@ -25,13 +26,30 @@ export default function AddPropertyModal({
   userId,
   onSuccess,
   property,
+  amenities,
 }) {
   const [form, setForm] = useState(emptyForm);
   const [tab, setTab] = useState("main");
+  const [selectedAmenities, setSelectedAmenities] = useState([]);
+  const [photos, setPhotos] = useState([]);
+
+  const toggleAmenity = (amenityId) => {
+    setSelectedAmenities((prev) =>
+      prev.includes(amenityId)
+        ? prev.filter((id) => id !== amenityId)
+        : [...prev, amenityId]
+    );
+  };
+
   useEffect(() => {
-    if (!isOpen) return;
+    setTab("main");
 
     if (property) {
+      setSelectedAmenities(
+        property.property_amenities.map((a) => a.amenities.id)
+      );
+      setPhotos(property.property_images || []);
+
       setForm({
         title: property.title ?? "",
         small_title: property.small_title ?? "",
@@ -47,6 +65,8 @@ export default function AddPropertyModal({
       });
     } else {
       setForm(emptyForm);
+      setSelectedAmenities([]);
+      setPhotos([]);
     }
   }, [isOpen, property]);
 
@@ -56,6 +76,7 @@ export default function AddPropertyModal({
 
   const handleSave = async (e) => {
     e.preventDefault();
+
     const payload = {
       ...form,
       owner_id: userId,
@@ -66,14 +87,23 @@ export default function AddPropertyModal({
       price_per_night: Number(form.price_per_night),
     };
 
+    let propertyId;
+
     if (isEdit) {
       console.log("Calling Update");
+
       await updateProperty(property.id, payload);
+      propertyId = property.id;
     } else {
       console.log("Calling Create");
-      await createProperty(payload);
+
+      const createdProperty = await createProperty(payload);
+      propertyId = createdProperty.id;
     }
 
+    await updatePropertyAmenities(propertyId, selectedAmenities);
+
+    setTab("main");
     onSuccess?.();
     onClose();
   };
@@ -213,7 +243,7 @@ export default function AddPropertyModal({
               </div>
               <ModalFormField
                 id="price_per_night"
-                label="Price per Night"
+                label="Price per night (€)"
                 type="number"
                 min="20"
                 value={form.price_per_night ?? ""}
@@ -227,16 +257,63 @@ export default function AddPropertyModal({
             </>
           )}
           {tab === "amenities" && (
-            <div className="grid grid-cols-2 gap-3">
-              {property.property_amenities.map((amenity) => (
+            <div className="grid grid-cols-2 gap-3 pt-3">
+              {amenities?.map((amenity) => (
                 <AmenitiesItem
-                  amenity={amenity.amenities}
-                  key={amenity.amenities.id}
+                  amenity={amenity}
+                  selectedAmenities={selectedAmenities}
+                  key={amenity.id}
+                  onToggle={toggleAmenity}
                 />
               ))}
             </div>
           )}
-          {tab === "photos" && <></>}
+          {tab === "photos" && (
+            <>
+              {console.log(photos)}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">Property Photos</h3>
+
+                {/* Upload input */}
+                <input
+                  type="file"
+                  multiple
+                  accept="image/*"
+                  className="w-full border p-2 rounded"
+                  onChange={(e) => {
+                    const files = Array.from(e.target.files);
+                    setPhotos((prev) => [...prev, ...files]);
+                  }}
+                />
+
+                {/* Preview grid */}
+                <div className="grid grid-cols-3 gap-3">
+                  {photos.map((photo, idx) => {
+                    return (
+                      <div key={idx} className="relative">
+                        <img
+                          src={photo.image_url}
+                          className="w-full h-24 object-cover rounded-lg"
+                        />
+
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setPhotos((prev) =>
+                              prev.filter((_, i) => i !== idx)
+                            )
+                          }
+                          className="absolute top-1 right-1 bg-black text-white text-xs px-2 py-1 rounded"
+                        >
+                          X
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </>
+          )}
 
           <div className="flex justify-end gap-2 ">
             <button

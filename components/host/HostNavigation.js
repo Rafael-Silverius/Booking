@@ -2,7 +2,6 @@ const navItems = [
   { id: "dashboard", label: "Dashboard" },
   { id: "listings", label: "Listings" },
   { id: "reservations", label: "Reservations" },
-  { id: "earnings", label: "Earnings" },
   { id: "ratings", label: "Ratings" },
   { id: "settings", label: "Settings" },
 ];

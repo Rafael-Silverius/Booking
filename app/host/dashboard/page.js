@@ -8,9 +8,11 @@ import Ratings from "@/components/host/Ratings";
 import Reservations from "@/components/host/Reservations";
 import Settings from "@/components/host/Settings";
 import { useAuth } from "@/providers/AuthProvider";
+import { getAmenities } from "@/services/apiAmenities";
 import { getBookingsByOwnerId } from "@/services/apiBookings";
 import { getPropertiesByOwnerId } from "@/services/apiProperties";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 export default function Page() {
   const { session } = useAuth();
@@ -19,6 +21,11 @@ export default function Page() {
   const [modal, setModal] = useState({ open: false, property: null });
   const [refreshKey, setRefreshKey] = useState(0);
   const [activeSection, setActiveSection] = useState("dashboard");
+  const [amenities, setAmenities] = useState([]);
+
+  useEffect(() => {
+    getAmenities().then(setAmenities).catch(console.error);
+  }, []);
 
   const handleSuccess = () => {
     setRefreshKey((prev) => prev + 1);
@@ -81,8 +88,8 @@ export default function Page() {
           setModal={setModal}
           onSuccess={handleSuccess}
         />
-        <Reservations properties={properties} />
-        <Earnings />
+        {console.log(properties)}
+        <Reservations properties={properties} onSuccess={handleSuccess} />
         <Ratings />
         <Settings />
       </main>
@@ -91,6 +98,7 @@ export default function Page() {
         onClose={() => setModal({ open: false, property: null })}
         userId={session?.user?.id}
         property={modal.property}
+        amenities={amenities}
         onSuccess={handleSuccess}
       />
     </div>

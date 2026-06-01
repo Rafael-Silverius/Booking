@@ -4,6 +4,7 @@ import Navigation from "@/components/Navigation";
 import Logo from "@/components/Logo";
 import "leaflet/dist/leaflet.css";
 import { AuthProvider } from "@/providers/AuthProvider";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,6 +31,7 @@ export default function RootLayout({ children }) {
           </header>
 
           <main>{children}</main>
+          <Toaster />
         </AuthProvider>
       </body>
     </html>
