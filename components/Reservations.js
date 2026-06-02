@@ -1,6 +1,6 @@
 import ReservationItem from "./ReservationItem";
 
-export default function Reservations({ properties, onsuccess }) {
+export default function Reservations({ properties, onsuccess, currentUser }) {
   return (
     <section id="reservations" className="bg-white rounded-3xl shadow p-6 mb-4">
       <h2 className="text-2xl font-bold mb-6">Your Reservations</h2>
@@ -10,6 +10,7 @@ export default function Reservations({ properties, onsuccess }) {
             property={property}
             key={property.id}
             onsuccess={onsuccess}
+            currentUser={currentUser}
           />
         ))}
       </div>

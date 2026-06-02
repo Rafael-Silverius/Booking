@@ -1,18 +1,16 @@
 "use client";
 import AddPropertyModal from "@/components/AddPropertyModal";
-import Dashboard from "@/components/host/Dashboard";
-import Earnings from "@/components/host/Earnings";
-import HostNavigation from "@/components/host/HostNavigation";
-import Listings from "@/components/host/Listings";
-import Ratings from "@/components/host/Ratings";
-import Reservations from "@/components/host/Reservations";
-import Settings from "@/components/host/Settings";
+import Dashboard from "@/components/Dashboard";
+import HostNavigation from "@/components/HostNavigation";
+import Listings from "@/components/Listings";
+import Ratings from "@/components/Ratings";
+import Reservations from "@/components/Reservations";
+import Settings from "@/components/Settings";
 import { useAuth } from "@/providers/AuthProvider";
 import { getAmenities } from "@/services/apiAmenities";
 import { getBookingsByOwnerId } from "@/services/apiBookings";
 import { getPropertiesByOwnerId } from "@/services/apiProperties";
 import { useEffect, useState } from "react";
-import { toast } from "sonner";
 
 export default function Page() {
   const { session } = useAuth();
@@ -89,7 +87,11 @@ export default function Page() {
           onSuccess={handleSuccess}
         />
         {console.log(properties)}
-        <Reservations properties={properties} onSuccess={handleSuccess} />
+        <Reservations
+          properties={properties}
+          onSuccess={handleSuccess}
+          currentUser={session?.user}
+        />
         <Ratings />
         <Settings />
       </main>

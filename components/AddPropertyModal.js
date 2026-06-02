@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { createProperty, updateProperty } from "@/services/apiProperties";
 import ModalFormField from "./ModalFormField";
-import AmenitiesItem from "./host/AmenitiesItem";
+import AmenitiesItem from "./AmenitiesItem";
 import { updatePropertyAmenities } from "@/services/apiAmenities";
 
 const emptyForm = {

@@ -26,6 +26,27 @@ export function formatDate(dateStr) {
     year: "numeric",
   });
 }
+export function formatDateForMessages(dateStr) {
+  const date = new Date(dateStr);
+  const now = new Date();
+
+  const isToday = date.toDateString() === now.toDateString();
+
+  if (isToday) {
+    return date.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  }
+
+  return date.toLocaleDateString([], {
+    day: "2-digit",
+    month: "2-digit",
+    year: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
 
 export async function confirmBooking(id) {
   return await updateStatusBooking(id, "confirmed");

@@ -1,7 +1,9 @@
 import { cancelBooking, confirmBooking, StatusBadge } from "@/helpers/help";
+import supabase from "@/services/supabase";
+import Link from "next/link";
 import { useState } from "react";
 
-export default function ReservationItem({ property }) {
+export default function ReservationItem({ property, currentUser }) {
   const [tab, setTab] = useState("pending");
   const [bookings, setBookings] = useState(property.bookings || []);
 
@@ -129,26 +131,14 @@ export default function ReservationItem({ property }) {
                     </div>
 
                     <div className="flex items-center gap-2">
+                      <Link
+                        href={`/host/bookings/${b.id}`}
+                        className="px-3 py-1.5 rounded-lg border text-sm hover:bg-gray-50 transition"
+                      >
+                        View Booking
+                      </Link>
+
                       <StatusBadge status={b.status} />
-
-                      {/* hidden actions */}
-                      {b.status === "pending" && (
-                        <div className="opacity-0 group-hover:opacity-100 transition flex gap-2 ml-2">
-                          <button
-                            className="text-green-600 text-sm px-3 py-1.5 rounded-full hover:bg-green-50"
-                            onClick={() => handleConfirm(b.id)}
-                          >
-                            Accept
-                          </button>
-
-                          <button
-                            className="text-red-600 text-sm px-3 py-1.5 rounded-full hover:bg-red-50"
-                            onClick={() => handleCancel(b.id)}
-                          >
-                            Reject
-                          </button>
-                        </div>
-                      )}
                     </div>
                   </div>
                 ))

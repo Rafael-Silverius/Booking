@@ -111,3 +111,35 @@ export async function updateStatusBooking(bookingId, status) {
     .select()
     .single();
 }
+
+export async function getBookingById(id) {
+  const { data, error } = await supabase
+    .from("bookings")
+    .select(
+      `
+      *,
+      profiles!guest_id (
+        id,
+        full_name,
+        email,
+        avatar_url
+      ),
+      properties (
+        id,
+        title,
+        city,
+        country,
+        price_per_night,
+        property_images (
+          image_url
+        )
+      )
+    `
+    )
+    .eq("id", id)
+    .single();
+
+  if (error) throw error;
+
+  return data;
+}

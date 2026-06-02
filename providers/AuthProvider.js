@@ -7,37 +7,45 @@ const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [session, setSession] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // 1. Get initial session
     async function fetchSession() {
       const {
         data: { session },
       } = await supabase.auth.getSession();
 
       setSession(session);
+      setLoading(false);
     }
 
     fetchSession();
 
-    // 2. Listen for changes
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
+      setLoading(false);
     });
 
-    // 3. Cleanup
     return () => {
       subscription.unsubscribe();
     };
   }, []);
 
   return (
-    <AuthContext.Provider value={{ session }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ session, loading }}>
+      {children}
+    </AuthContext.Provider>
   );
 }
 
 export function useAuth() {
-  return useContext(AuthContext);
+  const context = useContext(AuthContext);
+
+  if (!context) {
+    throw new Error("useAuth must be used inside AuthProvider");
+  }
+
+  return context;
 }
