@@ -1,45 +1,9 @@
 import { cancelBooking, confirmBooking, StatusBadge } from "@/helpers/help";
-import supabase from "@/services/supabase";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function ReservationItem({ property, currentUser }) {
+export default function ReservationItem({ property }) {
   const [tab, setTab] = useState("pending");
-  const [bookings, setBookings] = useState(property.bookings || []);
-
-  const updateBookingStatusLocal = (id, status) => {
-    setBookings((prev) =>
-      prev.map((b) => (b.id === id ? { ...b, status } : b))
-    );
-  };
-
-  const handleConfirm = async (id) => {
-    const previous = bookings;
-
-    // 1. optimistic UI update
-    updateBookingStatusLocal(id, "confirmed");
-
-    try {
-      await confirmBooking(id);
-    } catch (err) {
-      // rollback if failed
-      setBookings(previous);
-      console.error(err);
-    }
-  };
-
-  const handleCancel = async (id) => {
-    const previous = bookings;
-
-    updateBookingStatusLocal(id, "cancelled");
-
-    try {
-      await cancelBooking(id);
-    } catch (err) {
-      setBookings(previous);
-      console.error(err);
-    }
-  };
 
   return (
     <div className="bg-white rounded-xl p-4 mb-6 shadow">
@@ -113,9 +77,9 @@ export default function ReservationItem({ property, currentUser }) {
             </div>
 
             {/* Bookings list */}
-            {bookings.filter((b) => b.status === tab).length ? (
-              bookings
-                .filter((b) => b.status === tab)
+            {property?.bookings?.filter((b) => b.status === tab).length ? (
+              property?.bookings
+                ?.filter((b) => b.status === tab)
                 .map((b) => (
                   <div
                     key={b.id}

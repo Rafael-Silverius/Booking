@@ -87,11 +87,7 @@ export default function Page() {
           onSuccess={handleSuccess}
         />
         {console.log(properties)}
-        <Reservations
-          properties={properties}
-          onSuccess={handleSuccess}
-          currentUser={session?.user}
-        />
+        <Reservations properties={properties} onSuccess={handleSuccess} />
         <Ratings />
         <Settings />
       </main>

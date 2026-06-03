@@ -1,4 +1,4 @@
-import supabase from "./supabase";
+import supabase from "./supabase/supabase";
 
 export async function getMessages(booking_id) {
   const { data, error } = await supabase

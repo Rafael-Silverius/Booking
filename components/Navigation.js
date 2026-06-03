@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 import { useAuth } from "@/providers/AuthProvider";
-import supabase from "@/services/supabase";
+import supabase from "@/services/supabase/supabase";
 import { useEffect, useState } from "react";
 import { fetchProfile } from "@/services/apiProfiles";
 

@@ -32,6 +32,5 @@ export default function Page() {
   if (loading) {
     return <div>Loading bookings...</div>;
   }
-  console.log(bookings);
   return <BookingsClient bookings={bookings} />;
 }

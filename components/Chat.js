@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import MessageItem from "./MessageItem";
 import { postMessage } from "@/services/apiMessages";
-import supabase from "@/services/supabase";
+import supabase from "@/services/supabase/supabase";
 
 export default function Chat({
   booking,
@@ -51,7 +51,7 @@ export default function Chat({
   }, [booking.id]);
 
   return (
-    <div className="flex flex-col h-[500px]">
+    <div className="flex flex-col h-full">
       {/* messages */}
       <div className="flex-1 overflow-y-auto flex flex-col gap-2 p-2 h-full">
         {messages?.map((msg) => (
@@ -65,7 +65,7 @@ export default function Chat({
       </div>
 
       {/* input */}
-      <div className="border-t flex gap-2 p-2">
+      <div className="border-t flex gap-2">
         <input
           type="text"
           placeholder="Type a message..."

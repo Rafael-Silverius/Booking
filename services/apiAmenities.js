@@ -1,4 +1,4 @@
-import supabase from "./supabase";
+import supabase from "./supabase/supabase";
 
 export async function getAmenities() {
   const { data, error } = await supabase.from("amenities").select("*");

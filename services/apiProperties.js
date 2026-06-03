@@ -1,4 +1,4 @@
-import supabase from "./supabase";
+import supabase from "./supabase/supabase";
 
 export async function getAvailableProperties({ location, checkin, checkout }) {
   // 1. Find overlapping bookings
