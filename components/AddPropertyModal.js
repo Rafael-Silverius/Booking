@@ -5,6 +5,8 @@ import { createProperty, updateProperty } from "@/services/apiProperties";
 import ModalFormField from "./ModalFormField";
 import AmenitiesItem from "./AmenitiesItem";
 import { updatePropertyAmenities } from "@/services/apiAmenities";
+import { toast } from "sonner";
+import supabase from "@/services/supabase/supabase";
 
 const emptyForm = {
   title: "",
@@ -89,23 +91,39 @@ export default function AddPropertyModal({
 
     let propertyId;
 
-    if (isEdit) {
-      console.log("Calling Update");
+    try {
+      if (isEdit) {
+        await updateProperty(property.id, payload);
+        propertyId = property.id;
 
-      await updateProperty(property.id, payload);
-      propertyId = property.id;
-    } else {
-      console.log("Calling Create");
+        toast.success("Property updated!", { id: "property" });
+      } else {
+        const createdProperty = await createProperty(payload);
+        propertyId = createdProperty.id;
 
-      const createdProperty = await createProperty(payload);
-      propertyId = createdProperty.id;
+        toast.success("Property created!", { id: "property" });
+      }
+
+      // update amenities
+      await updatePropertyAmenities(propertyId, selectedAmenities);
+
+      // OPTIONAL: update user profile to owner
+      if (userId) {
+        await supabase
+          .from("profiles")
+          .update({ role: "host" })
+          .eq("id", userId);
+      }
+
+      toast.success("Saved successfully!", { id: "property" });
+
+      setTab("main");
+      onSuccess?.();
+      onClose();
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong", { id: "property" });
     }
-
-    await updatePropertyAmenities(propertyId, selectedAmenities);
-
-    setTab("main");
-    onSuccess?.();
-    onClose();
   };
 
   return (

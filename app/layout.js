@@ -31,7 +31,28 @@ export default function RootLayout({ children }) {
           </header>
 
           <main>{children}</main>
-          <Toaster />
+          <Toaster
+            position="top-center"
+            toastOptions={{
+              duration: 3000,
+              style: {
+                borderRadius: "10px",
+                padding: "12px 16px",
+              },
+              success: {
+                iconTheme: {
+                  primary: "#16a34a",
+                  secondary: "#fff",
+                },
+              },
+              error: {
+                iconTheme: {
+                  primary: "#dc2626",
+                  secondary: "#fff",
+                },
+              },
+            }}
+          />
         </AuthProvider>
       </body>
     </html>

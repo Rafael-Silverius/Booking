@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import PropertyAmenities from "./PropertyAmenities";
 import { useMemo } from "react";
 import { useAuth } from "@/providers/AuthProvider";
+import { toast } from "sonner";
 
 export default function PropertyClient({
   property,
@@ -46,20 +47,21 @@ export default function PropertyClient({
         check_out: checkout,
         guests,
         total_price: total_cost,
-        guest_id: session.user.id, // IMPORTANT
+        guest_id: session.user.id,
       });
 
       if (error) throw error;
 
-      alert("Reserved successfully!");
-      router.refresh();
+      toast.success("Successful Reservation!", { id: "booking" });
+
+      router.push("/bookings");
     } catch (error) {
       console.error(error);
 
       if (error?.code === "23P01") {
-        alert("These dates are already booked");
+        toast.error("These dates are already booked", { id: "booking" });
       } else {
-        alert("Something went wrong");
+        toast.error("Something went wrong", { id: "booking" });
       }
     }
   };

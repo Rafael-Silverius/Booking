@@ -3,6 +3,7 @@
 import supabase from "@/services/supabase/supabase";
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { toast } from "sonner";
 
 export default function Auth() {
   const searchParams = useSearchParams();
@@ -21,7 +22,7 @@ export default function Auth() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    if (loading) return; // prevent double submit
+    if (loading) return;
     setLoading(true);
     setError("");
 
@@ -29,6 +30,8 @@ export default function Auth() {
       let result;
 
       if (isSignUp) {
+        toast.loading("Creating account...", { id: "auth" });
+
         result = await supabase.auth.signUp({
           email,
           password,
@@ -38,26 +41,41 @@ export default function Auth() {
             },
           },
         });
+
+        const { error } = result;
+
+        if (error) {
+          toast.error(error.message, { id: "auth" });
+          setError(error.message);
+          return;
+        }
+
+        toast.success("Account created!", { id: "auth" });
       } else {
+        toast.loading("Signing in...", { id: "auth" });
+
         result = await supabase.auth.signInWithPassword({
           email,
           password,
         });
+
+        const { error } = result;
+
+        if (error) {
+          toast.error(error.message, { id: "auth" });
+          setError(error.message);
+          return;
+        }
+
+        toast.success("Welcome back!", { id: "auth" });
       }
 
-      const { error } = result;
-
-      if (error) {
-        setError(error.message);
-        return;
-      }
-
-      // small delay helps Supabase cookie sync in some cases
       setTimeout(() => {
         router.push(redirect);
-        router.refresh(); // important for SSR session sync
-      }, 100);
+        router.refresh();
+      }, 300);
     } catch (err) {
+      toast.error(err.message || "Something went wrong");
       setError(err.message || "Something went wrong");
     } finally {
       setLoading(false);

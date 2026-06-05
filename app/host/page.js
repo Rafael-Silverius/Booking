@@ -35,11 +35,7 @@ export default function Page() {
           <Link
             className="bg-red-500 hover:bg-red-600 text-white px-8 py-4 rounded-2xl text-lg"
             href={
-              !session
-                ? "/login?redirect=/host/dashboard"
-                : profile?.role === "host"
-                ? "/host/dashboard"
-                : "/host/createListing"
+              !session ? "/login?redirect=/host/dashboard" : "/host/dashboard"
             }
           >
             Get Started

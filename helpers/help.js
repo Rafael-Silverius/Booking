@@ -1,4 +1,5 @@
 import { updateStatusBooking } from "@/services/apiBookings";
+import supabase from "@/services/supabase/supabase";
 
 export function StatusBadge({ status }) {
   const styles = {
@@ -53,4 +54,12 @@ export async function confirmBooking(id) {
 }
 export async function cancelBooking(id) {
   return await updateStatusBooking(id, "cancelled");
+}
+
+export function getCityImage(city) {
+  const fileName = city.toLowerCase().replace(/\s/g, "-") + ".jpg";
+
+  const { data } = supabase.storage.from("city-images").getPublicUrl(fileName);
+
+  return data.publicUrl;
 }

@@ -6,6 +6,7 @@ import { differenceInCalendarDays } from "date-fns";
 import { insertBooking } from "@/services/apiBookings";
 import { useAuth } from "@/providers/AuthProvider";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function PropertyAvailability({
   property_id,
@@ -43,7 +44,7 @@ export default function PropertyAvailability({
       return;
     }
     try {
-      await insertBooking({
+      const { error } = await insertBooking({
         property_id: property_id,
         check_in: dateRange.from,
         check_out: dateRange.to,
@@ -51,14 +52,16 @@ export default function PropertyAvailability({
         total_price: totalPrice,
       });
 
-      alert("Reserved successfully!");
-    } catch (error) {
-      console.log(error);
+      if (error) throw error;
 
-      if (error.code === "23P01") {
-        alert("These dates are already booked");
+      toast.success("Successful Reservation!", { id: "booking" });
+
+      router.push("/bookings");
+    } catch (error) {
+      if (error?.code === "23P01") {
+        toast.error("These dates are already booked", { id: "booking" });
       } else {
-        alert("Something went wrong");
+        toast.error("Something went wrong", { id: "booking" });
       }
     }
   }

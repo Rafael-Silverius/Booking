@@ -12,9 +12,12 @@ import { useAuth } from "@/providers/AuthProvider";
 import supabase from "@/services/supabase/supabase";
 import { useEffect, useState } from "react";
 import { fetchProfile } from "@/services/apiProfiles";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function Navigation() {
   const { session } = useAuth();
+  const router = useRouter();
 
   const [profile, setProfile] = useState(null);
 
@@ -29,6 +32,22 @@ export default function Navigation() {
     loadProfile();
   }, [session]);
 
+  const handleLogout = async () => {
+    try {
+      toast.loading("Signing out...", { id: "logout" });
+
+      await supabase.auth.signOut();
+
+      toast.success("Logged out", { id: "logout" });
+
+      router.push("/");
+      router.refresh();
+    } catch (err) {
+      toast.error("Logout failed", { id: "logout" });
+      console.error(err);
+    }
+  };
+
   return (
     <>
       <nav className="flex items-center gap-8">
@@ -42,19 +61,19 @@ export default function Navigation() {
         {session && (
           <>
             <Link
-              href={profile?.role === "host" ? "/host/dashboard" : "/bookings"}
+              href="/bookings"
               className="text-sm font-medium text-slate-700 hover:text-black transition"
             >
-              {profile?.role === "host" ? "Manage Properties" : "My Bookings"}
+              My Bookings
             </Link>
-            {/* {profile?.role === "host" && (
+            {profile?.role === "host" && (
               <Link
-                href="/host"
+                href="/host/dashboard"
                 className="text-sm font-medium text-slate-700 hover:text-black transition"
               >
                 Manage Bookings
               </Link>
-            )} */}
+            )}
           </>
         )}
         <Link
@@ -92,9 +111,7 @@ export default function Navigation() {
                   </DropdownMenuItem>
 
                   <DropdownMenuItem
-                    onClick={async () => {
-                      await supabase.auth.signOut();
-                    }}
+                    onClick={handleLogout}
                     className="cursor-pointer"
                   >
                     <Link href="/">Logout</Link>
