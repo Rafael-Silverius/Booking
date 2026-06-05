@@ -7,7 +7,7 @@ const navItems = [
 ];
 export default function HostNavigation({ activeSection }) {
   return (
-    <aside className="bg-bg-white border-r pt-6 px-8 w-60 sticky top-0 h-screen">
+    <aside className="hidden md:block bg-white border-r pt-10 px-2 lg:px-8 w-fit lg:w-60 sticky top-0 h-screen">
       <nav className="space-y-4">
         {navItems.map((item) => (
           <a

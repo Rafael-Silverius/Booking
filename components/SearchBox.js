@@ -5,6 +5,7 @@ import DatePickerWithRange from "./DatePickerWithRange";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { format } from "date-fns";
+import { Search } from "lucide-react";
 
 export default function SearchBox() {
   const [searchData, setSearchData] = useState({
@@ -47,20 +48,28 @@ export default function SearchBox() {
 
   return (
     <div className="bg-gray-100 border-b-2">
-      <div className="h-28 lg:w-1/2 m-auto ">
-        <div className="bg-white flex items-center mx-8 pr-2 rounded-full shadow-md p-2 gap-2">
+      <div className=" max-w-fit mx-auto px-4 py-4">
+        <div
+          className="
+        bg-white rounded-3xl shadow-md
+        flex flex-col md:flex-row
+        items-stretch md:items-center
+        gap-3 md:gap-2
+        p-4 md:p-2
+      "
+        >
           <SearchBoxItem
             title="Where"
             subtitle="Select location"
             value={searchData.location}
             onChange={(e) => handleChange("location", e.target.value)}
           />
-
+          <div className="hidden md:block h-8 w-px bg-gray-300" />
           <DatePickerWithRange
             date={searchData.date}
             setDate={(value) => handleChange("date", value)}
           />
-
+          <div className="hidden md:block h-8 w-px bg-gray-300" />
           <SearchBoxItem
             title="Who"
             subtitle="Add guests"
@@ -69,12 +78,12 @@ export default function SearchBox() {
             value={searchData.guests}
             onChange={(e) => handleChange("guests", e.target.value)}
           />
-
           <Button
-            className="rounded-full h-12 w-12 bg-red-500 hover:bg-red-600"
+            className="bg-red-500 hover:bg-red-600 text-white rounded-full h-12 px-4 md:px-6 shrink-0 flex items-center gap-2"
             onClick={handleSearch}
           >
-            🔍
+            <Search size={18} />
+            <span className="hidden sm:inline">Search</span>
           </Button>
         </div>
       </div>

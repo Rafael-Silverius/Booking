@@ -25,9 +25,11 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`${geistSans.variable} h-full antialiased `}>
       <body className={`${geistSans.className} min-h-screen flex flex-col`}>
         <AuthProvider>
-          <header className="bg-gray-100 h-20 flex items-center justify-between px-20">
-            <Logo />
-            <Navigation />
+          <header className="sticky top-0 z-50 bg-gray-100/94 backdrop-blur-md border-b border-gray-200 h-20">
+            <div className="flex h-full items-center justify-between w-full max-w-7xl mx-auto px-6">
+              <Logo />
+              <Navigation />
+            </div>
           </header>
 
           <main>{children}</main>

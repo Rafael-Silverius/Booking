@@ -127,9 +127,9 @@ export default function AddPropertyModal({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4">
-      <div className="bg-white p-6 rounded-2xl w-125 max-h-[90vh] overflow-y-auto">
-        <form onSubmit={handleSave}>
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-100">
+      <div className="bg-white p-6 rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-xl animate-in fade-in zoom-in-95">
+        <form onSubmit={handleSave} className="">
           <h2 className="text-xl font-bold mb-2">
             {property ? "Edit property" : "Create new property"}
           </h2>
@@ -180,7 +180,6 @@ export default function AddPropertyModal({
                 value={form.title ?? ""}
                 onChange={(e) => setForm({ ...form, title: e.target.value })}
               />
-
               <ModalFormField
                 id="small_title"
                 label="Small title"
@@ -198,14 +197,12 @@ export default function AddPropertyModal({
                   setForm({ ...form, description: e.target.value })
                 }
               />
-
               <ModalFormField
                 id="city"
                 label="City"
                 value={form.city ?? ""}
                 onChange={(e) => setForm({ ...form, city: e.target.value })}
               />
-
               <ModalFormField
                 id="country"
                 label="Country"
@@ -333,7 +330,7 @@ export default function AddPropertyModal({
             </>
           )}
 
-          <div className="flex justify-end gap-2 ">
+          <div className="flex justify-end gap-2">
             <button
               type="button"
               onClick={onClose}

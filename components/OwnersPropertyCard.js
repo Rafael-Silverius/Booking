@@ -30,22 +30,24 @@ export default function OwnersPropertyCard({ property, setModal, onSuccess }) {
   console.log(property);
 
   return (
-    <div className="border rounded-2xl p-4 flex items-center gap-4">
-      <img
-        src={property?.property_images[0]?.image_url}
-        className="w-32 h-24 rounded-xl object-cover"
-      />
+    <div className="border rounded-2xl p-4 flex justify-between flex-col md:flex-row items-center gap-4">
+      <div className="flex items-center gap-4">
+        <img
+          src={property?.property_images[0]?.image_url}
+          className="w-32 h-24 rounded-xl object-cover hidden sm:block"
+        />
 
-      <div className="flex-1">
-        <h3 className="font-bold text-lg">{property.title}</h3>
-        <small className="text-gray-600">{property.small_title}</small>
+        <div className="flex-1">
+          <h3 className="font-bold text-md lg:text-lg">{property.title}</h3>
+          <small className="text-gray-600">{property.small_title}</small>
 
-        <p className="text-gray-500">
-          {property.city}, {property.country}
-        </p>
+          <p className="text-gray-500">
+            {property.city}, {property.country}
+          </p>
+        </div>
       </div>
 
-      <div className="text-right">
+      <div className="flex flex-col items-center">
         <p className="font-bold">€{property.price_per_night}/night</p>
         <div className="flex gap-2">
           <button
@@ -55,7 +57,7 @@ export default function OwnersPropertyCard({ property, setModal, onSuccess }) {
             Edit
           </button>
           <button
-            className="mt-2 border px-4 py-1 rounded-lg bg-red-500 text-white"
+            className="mt-2 border px-4 py-1 rounded-lg whitespace-nowrap bg-red-500 text-white"
             onClick={handleDelete}
           >
             Delete Property

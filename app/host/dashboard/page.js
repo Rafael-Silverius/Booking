@@ -78,7 +78,7 @@ export default function Page() {
     <div className="min-h-screen bg-gray-50 flex">
       <HostNavigation activeSection={activeSection} />
 
-      <main className="flex-1 p-10">
+      <main className="flex-1 p-4 md:p-10">
         <Dashboard properties={properties} reservations={reservations} />
         <Listings
           properties={properties}

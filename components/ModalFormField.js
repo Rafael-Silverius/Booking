@@ -14,7 +14,7 @@ export default function ModalFormField({
       {type === "textarea" ? (
         <textarea
           id={id}
-          className="w-full border p-2 mb-3 rounded"
+          className="w-full border p-2 mb-2 rounded"
           placeholder={placeholder ?? label}
           value={value ?? ""}
           onChange={onChange}
@@ -22,7 +22,7 @@ export default function ModalFormField({
       ) : (
         <input
           id={id}
-          className="w-full border p-2 mb-3 rounded"
+          className="w-full border p-2 mb-2 rounded"
           type={type}
           placeholder={placeholder ?? label}
           value={value ?? ""}

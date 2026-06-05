@@ -7,7 +7,7 @@ export default function DatePickerWithRange({ date, setDate }) {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <div className="rounded-full w-1/3 bg-white flex flex-col justify-center py-2 px-4 hover:bg-gray-200">
+        <div className="rounded-full bg-white flex flex-col justify-center py-2 px-4 hover:bg-gray-200">
           <span className="text-sm">When</span>
 
           <span className="text-sm text-gray-500 flex items-center gap-2">
