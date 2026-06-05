@@ -2,11 +2,31 @@
 
 StayFinder is a full-stack property booking web application inspired by platforms such as Airbnb. The application allows users to browse properties, make reservations, communicate with property owners, and manage bookings. Property owners can create and manage listings, view reservations, and interact with guests through an integrated messaging system.
 
+## 🚀 Live Demo
+
+👉 https://booking-xtu7.vercel.app
+
+
 ## Project Status
 
 ⚠️ This project is currently under active development and is not yet complete.
 
 Some features may be partially implemented, unfinished, or subject to change. The application is being developed as part of a university dissertation project and serves as a demonstration of modern web application development using Next.js and Supabase.
+
+## Test Accounts
+
+### Host Account
+
+Email: testowner@gmail.com
+
+Password: test123
+
+### Guest Account
+
+Email: test@gmail.com
+
+Password: test123
+
 
 ## Screenshots
 
@@ -25,8 +45,6 @@ Some features may be partially implemented, unfinished, or subject to change. Th
 ### Booking Management
 
 ![Booking Management](docs/screenshots/BookingExample.png)
-
-
 
 ## Features
 
@@ -67,19 +85,7 @@ Some features may be partially implemented, unfinished, or subject to change. Th
 * PostgreSQL
 * Lucide React
 
-## Test Accounts
 
-### Host Account
-
-Email: testowner@gmail.com
-
-Password: test123
-
-### Guest Account
-
-Email: test@gmail.com
-
-Password: test123
 
 ## Working Locations
 
@@ -105,56 +111,7 @@ The following functionality is still being developed:
 * Enhanced mobile responsiveness
 
 
-## Installation
 
-Clone the repository:
-
-```bash
-git clone https://github.com/Rafael-Silverius/Booking.git
-cd booking
-```
-
-Install dependencies:
-
-```bash
-npm install
-```
-
-
-## Environment Variables
-
-This project requires a Supabase project to run.
-
-Create a `.env.local` file in the root directory and add the following variables:
-
-```env
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-```
-
-You can obtain these values from your Supabase project's API settings.
-
-**Note:** The `.env.local` file is intentionally excluded from version control and is not included in this repository.
-
-Run the development server:
-
-```bash
-npm run dev
-```
-
-Open:
-
-http://localhost:3000
-
-## Project Structure
-
-```text
-app/
-components/
-services/
-lib/
-public/
-```
 
 ## Disclaimer
 
