@@ -4,6 +4,7 @@ import PropertyAvailability from "@/components/PropertyAvailability";
 import { useAuth } from "@/providers/AuthProvider";
 import { insertBooking } from "@/services/apiBookings";
 import { useRouter } from "next/navigation";
+import PropertyAmenities from "./PropertyAmenities";
 
 export default function PropertyClient({
   property,
@@ -117,16 +118,10 @@ export default function PropertyClient({
             </p>
           </div>
           <div className="border-t border-gray-200 my-8"></div>
-          <div className="pr-20">
-            <h1 className="font-bold text-xl pb-4">What this place offers</h1>
-            <ul className="text-gray-700 leading-6 whitespace-pre-line">
-              {property.property_amenities.map((item) => (
-                <li key={item.amenities.id}>{item.amenities.name}</li>
-              ))}
-            </ul>
-          </div>
+          <PropertyAmenities propertyAmenities={property.property_amenities} />
         </div>
         <div className="w-1/4 h-full sticky top-20 shadow-lg rounded-2xl bg-white">
+          {console.log(hasSearchParams)}
           {!hasSearchParams ? (
             <PropertyAvailability
               property_id={property.id}

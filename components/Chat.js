@@ -18,7 +18,7 @@ export default function Chat({
     if (!content.trim()) return;
 
     try {
-      const saved = await postMessage(booking.id, currentUserId, content);
+      await postMessage(booking.id, currentUserId, content);
     } catch (err) {
       throw err;
     } finally {

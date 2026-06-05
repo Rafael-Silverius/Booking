@@ -1,16 +1,15 @@
-import Link from "next/link";
 import PropertyCard from "./PropertyCard";
 
 export default function GroupedProperties({ groupedProperties }) {
   return (
-    <div className="space-y-14">
+    <div className="space-y-14 max-w-300 mx-auto">
       {Object.entries(groupedProperties).map(([city, cityProperties]) => {
         // skip empty cities
         if (!cityProperties.length) return null;
 
         return (
           <section key={city}>
-            <div className="mb-5 flex items-center justify-between">
+            <div className="mb-5 flex items-center justify-between ">
               <div>
                 <h2 className="text-2xl font-bold">Stay in {city}</h2>
 
@@ -19,20 +18,17 @@ export default function GroupedProperties({ groupedProperties }) {
                 </p>
               </div>
 
-              <Link
+              {/* <Link
                 href={`/cities/${city.toLowerCase()}`}
                 className="text-sm font-medium hover:underline"
               >
                 View all
-              </Link>
+              </Link> */}
             </div>
 
             <div className="scrollbar-hide flex snap-x gap-5 overflow-x-auto pb-4">
               {cityProperties.map((property) => (
-                <div
-                  key={property.id}
-                  className="w-[300px] flex-shrink-0 snap-start"
-                >
+                <div key={property.id} className="w-75 shrink-0 snap-start">
                   <PropertyCard property={property} />
                 </div>
               ))}
