@@ -90,8 +90,8 @@ The following functionality is still being developed:
 Clone the repository:
 
 ```bash
-git clone <repository-url>
-cd stayfinder
+git clone https://github.com/Rafael-Silverius/Booking.git
+cd booking
 ```
 
 Install dependencies:
