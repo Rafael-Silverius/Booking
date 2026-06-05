@@ -1,13 +1,7 @@
 import { getCityImage } from "@/helpers/help";
 import PropertyCard from "./PropertyCard";
 import { MapPin, Sparkles } from "lucide-react";
-
-const cityImages = {
-  Athens: "https://images.unsplash.com/photo-1555993539-1732b0258235",
-  Thessaloniki: "https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a",
-  Halkidiki: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21",
-  Kavala: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21",
-};
+import Image from "next/image";
 
 export default function GroupedProperties({ groupedProperties }) {
   return (
@@ -20,9 +14,10 @@ export default function GroupedProperties({ groupedProperties }) {
             {/* CITY HEADER WITH IMAGE */}
             <div className="relative rounded-2xl overflow-hidden h-40 shadow-md">
               {/* background image */}
-              <img
+              <Image
                 src={getCityImage(city)}
                 alt={city}
+                fill
                 className="absolute inset-0 w-full h-full object-cover"
               />
               {/* dark overlay */}
@@ -50,7 +45,7 @@ export default function GroupedProperties({ groupedProperties }) {
                 {cityProperties.map((property) => (
                   <div
                     key={property.id}
-                    className="min-w-[280px] max-w-[280px] shrink-0 snap-start"
+                    className="min-w-70 max-w-70 shrink-0 snap-start"
                   >
                     <PropertyCard property={property} />
                   </div>
@@ -58,8 +53,8 @@ export default function GroupedProperties({ groupedProperties }) {
               </div>
 
               {/* fade edges */}
-              <div className="pointer-events-none absolute left-0 top-0 h-full w-10 bg-gradient-to-r from-white to-transparent" />
-              <div className="pointer-events-none absolute right-0 top-0 h-full w-10 bg-gradient-to-l from-white to-transparent" />
+              <div className="pointer-events-none absolute left-0 top-0 h-full w-10 bg-linear-to-r from-white to-transparent" />
+              <div className="pointer-events-none absolute right-0 top-0 h-full w-10 bg-linear-to-l from-white to-transparent" />
             </div>
           </section>
         );

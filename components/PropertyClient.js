@@ -7,6 +7,7 @@ import PropertyAmenities from "./PropertyAmenities";
 import { useMemo } from "react";
 import { useAuth } from "@/providers/AuthProvider";
 import { toast } from "sonner";
+import Image from "next/image";
 
 export default function PropertyClient({
   property,
@@ -74,20 +75,27 @@ export default function PropertyClient({
       </h1>
 
       {/* IMAGES */}
-      <div className="w-full h-115 rounded-3xl overflow-hidden shadow-lg grid grid-rows-2 grid-cols-4 mb-8">
-        <div className="col-span-2 row-span-2">
-          <img
+      <div className="w-full h-[460px] rounded-3xl overflow-hidden shadow-lg grid grid-cols-4 grid-rows-2 gap-2 mb-8">
+        {/* MAIN IMAGE */}
+        <div className="col-span-2 row-span-2 relative">
+          <Image
             src={property.property_images[0]?.image_url}
-            className="w-full h-full object-cover"
+            alt="property image"
+            fill
+            className="object-cover"
           />
         </div>
 
+        {/* SMALL IMAGES */}
         {property.property_images?.slice(1, 5).map((img, i) => (
-          <img
-            key={i}
-            src={img.image_url}
-            className="w-full h-full object-cover"
-          />
+          <div key={i} className="relative w-full h-full">
+            <Image
+              src={img?.image_url}
+              alt="property image"
+              fill
+              className="object-cover"
+            />
+          </div>
         ))}
       </div>
 
@@ -106,8 +114,9 @@ export default function PropertyClient({
 
           <div className="flex items-center gap-4 mt-6">
             <img
-              src={property.profiles.avatar_url}
+              src={property?.profiles?.avatar_url}
               className="h-[40px] w-[40px] rounded-full"
+              alt="Avatar"
             />
             <div>
               <h2>Hosted by {property.profiles.full_name}</h2>
