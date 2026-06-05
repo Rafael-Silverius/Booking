@@ -8,6 +8,26 @@ StayFinder is a full-stack property booking web application inspired by platform
 
 Some features may be partially implemented, unfinished, or subject to change. The application is being developed as part of a university dissertation project and serves as a demonstration of modern web application development using Next.js and Supabase.
 
+## Screenshots
+
+### Home Page
+
+![Home Page](docs/screenshots/HostDashboard.png)
+
+### Property Details
+
+![Property Details](docs/screenshots/PropertyPage.png)
+
+### Editing Properties
+
+![Chat](docs/screenshots/EditingDetails1.png)
+
+### Booking Management
+
+![Booking Management](docs/screenshots/BookingExample.png)
+
+
+
 ## Features
 
 ### Guest Features
