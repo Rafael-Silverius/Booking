@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Calendar } from "./ui/calendar";
 import { differenceInCalendarDays } from "date-fns";
 import { insertBooking } from "@/services/apiBookings";
+import { useAuth } from "@/providers/AuthProvider";
+import { useRouter } from "next/navigation";
 
 export default function PropertyAvailability({
   property_id,
@@ -12,6 +14,8 @@ export default function PropertyAvailability({
 }) {
   const [dateRange, setDateRange] = useState();
   const [guests, setGuests] = useState(1);
+  const { session, loading } = useAuth();
+  const router = useRouter();
 
   const disabledDays = bookedDates.map((booking) => ({
     from: new Date(booking.check_in),
@@ -25,6 +29,15 @@ export default function PropertyAvailability({
   const totalPrice = nights * pricePerNight;
 
   async function handleReserve() {
+    if (loading) return;
+
+    if (!session?.user) {
+      const redirectUrl = encodeURIComponent(`/properties/${property_id}`);
+
+      router.push(`/login?redirect=${redirectUrl}`);
+      return;
+    }
+
     if (!dateRange?.from || !dateRange?.to) {
       alert("Please select a check-in and check-out date");
       return;
