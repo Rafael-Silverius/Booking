@@ -100,12 +100,21 @@ Install dependencies:
 npm install
 ```
 
-Create a `.env.local` file:
+
+## Environment Variables
+
+This project requires a Supabase project to run.
+
+Create a `.env.local` file in the root directory and add the following variables:
 
 ```env
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
+
+You can obtain these values from your Supabase project's API settings.
+
+**Note:** The `.env.local` file is intentionally excluded from version control and is not included in this repository.
 
 Run the development server:
 
