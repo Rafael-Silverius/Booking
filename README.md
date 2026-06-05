@@ -1,36 +1,165 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# StayFinder
 
-## Getting Started
+StayFinder is a full-stack property booking web application inspired by platforms such as Airbnb. The application allows users to browse properties, make reservations, communicate with property owners, and manage bookings. Property owners can create and manage listings, view reservations, and interact with guests through an integrated messaging system.
 
-First, run the development server:
+## Project Status
+
+⚠️ This project is currently under active development and is not yet complete.
+
+Some features may be partially implemented, unfinished, or subject to change. The application is being developed as part of a university dissertation project and serves as a demonstration of modern web application development using Next.js and Supabase.
+
+## Screenshots
+
+### Home Page
+
+![Home Page](docs/screenshots/HostDashboard.png)
+
+### Property Details
+
+![Property Details](docs/screenshots/PropertyPage.png)
+
+### Editing Properties
+
+![Chat](docs/screenshots/EditingDetails1.png)
+
+### Booking Management
+
+![Booking Management](docs/screenshots/BookingExample.png)
+
+
+
+## Features
+
+### Guest Features
+
+* User registration and authentication
+* Browse available properties
+* Search properties by location
+* View detailed property information
+* Create bookings
+* View booking history
+* Real-time messaging with property owners
+
+### Host Features
+
+* Create property listings
+* Edit and delete properties
+* Manage bookings
+* Accept or reject reservation requests
+* Communicate with guests through chat
+* View property and booking information
+
+### Technical Features
+
+* Next.js App Router
+* Supabase Authentication
+* Supabase Database
+* Real-time messaging using Supabase Realtime
+* Responsive UI with Tailwind CSS
+* Role-based functionality (Guest / Host)
+
+## Technologies Used
+
+* Next.js
+* React
+* Tailwind CSS
+* Supabase
+* PostgreSQL
+* Lucide React
+
+## Test Accounts
+
+### Host Account
+
+Email: testowner@gmail.com
+
+Password: test123
+
+### Guest Account
+
+Email: test@gmail.com
+
+Password: test123
+
+## Working Locations
+
+The application currently contains sample properties and booking data for the following locations:
+
+* Athens
+* Thessaloniki
+* Halkidiki
+* Kavala
+
+Additional locations may be added in future updates.
+
+## Known Issues / Missing Features
+
+The following functionality is still being developed:
+
+* Improved booking validation
+* Booking cancellation workflow
+* User profile enhancements
+* Notification system
+* Image upload improvements
+* Additional property filtering
+* Enhanced mobile responsiveness
+
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Rafael-Silverius/Booking.git
+cd booking
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+
+## Environment Variables
+
+This project requires a Supabase project to run.
+
+Create a `.env.local` file in the root directory and add the following variables:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+You can obtain these values from your Supabase project's API settings.
+
+**Note:** The `.env.local` file is intentionally excluded from version control and is not included in this repository.
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project Structure
 
-## Learn More
+```text
+app/
+components/
+services/
+lib/
+public/
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Disclaimer
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This project was developed for educational purposes. It is not intended for production use in its current state.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Author
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Developed by Rafael Walder.
