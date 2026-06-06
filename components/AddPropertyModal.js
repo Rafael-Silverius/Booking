@@ -130,7 +130,7 @@ export default function AddPropertyModal({
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-100">
       <div className="bg-white p-6 rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-xl animate-in fade-in zoom-in-95">
         <form onSubmit={handleSave} className="">
-          <h2 className="text-xl font-bold mb-2">
+          <h2 className="text-xl font-bold mb-2 ">
             {property ? "Edit property" : "Create new property"}
           </h2>
           {/* MODALS TABS  */}
@@ -138,7 +138,7 @@ export default function AddPropertyModal({
             <button
               type="button"
               onClick={() => setTab("main")}
-              className={`flex-1 py-2 rounded-lg transition ${
+              className={`flex-1 py-2 rounded-lg text-sm sm:text-[16px] transition ${
                 tab === "main"
                   ? "bg-white shadow font-semibold"
                   : "text-gray-600"
@@ -150,7 +150,7 @@ export default function AddPropertyModal({
             <button
               type="button"
               onClick={() => setTab("amenities")}
-              className={`flex-1 py-2 rounded-lg transition ${
+              className={`flex-1 py-2 rounded-lg text-sm sm:text-[16px] transition ${
                 tab === "amenities"
                   ? "bg-white shadow font-semibold"
                   : "text-gray-600"
@@ -162,7 +162,7 @@ export default function AddPropertyModal({
             <button
               type="button"
               onClick={() => setTab("photos")}
-              className={`flex-1 py-2 rounded-lg transition ${
+              className={`flex-1 py-2 rounded-lg text-sm sm:text-[16px] transition ${
                 tab === "photos"
                   ? "bg-white shadow font-semibold"
                   : "text-gray-600"
@@ -215,7 +215,7 @@ export default function AddPropertyModal({
                 value={form.address ?? ""}
                 onChange={(e) => setForm({ ...form, address: e.target.value })}
               />
-              <div className="grid grid-cols-4 gap-x-2">
+              <div className="grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4  gap-x-2">
                 <ModalFormField
                   id="guests"
                   label="Max Guests"
@@ -272,7 +272,7 @@ export default function AddPropertyModal({
             </>
           )}
           {tab === "amenities" && (
-            <div className="grid grid-cols-2 gap-3 pt-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 pt-3">
               {amenities?.map((amenity) => (
                 <AmenitiesItem
                   amenity={amenity}

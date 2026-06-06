@@ -26,11 +26,11 @@ export default function ReservationItem({ property }) {
         {property?.bookings?.length ? (
           <>
             {/* Tabs */}
-            <div className="flex gap-2 bg-gray-100 p-1 rounded-xl mb-4">
+            <div className="flex flex-col sm:flex-row gap-2 bg-gray-100 p-1 rounded-xl mb-4">
               <button
                 type="button"
                 onClick={() => setTab("pending")}
-                className={`flex-1 py-2 rounded-lg transition ${
+                className={`flex-1 py-2 text-sm rounded-lg transition ${
                   tab === "pending"
                     ? "bg-white shadow font-semibold"
                     : "text-gray-600"
@@ -42,7 +42,7 @@ export default function ReservationItem({ property }) {
               <button
                 type="button"
                 onClick={() => setTab("confirmed")}
-                className={`flex-1 py-2 rounded-lg transition ${
+                className={`flex-1 py-2 text-sm rounded-lg transition ${
                   tab === "confirmed"
                     ? "bg-white shadow font-semibold"
                     : "text-gray-600"
@@ -54,7 +54,7 @@ export default function ReservationItem({ property }) {
               <button
                 type="button"
                 onClick={() => setTab("completed")}
-                className={`flex-1 py-2 rounded-lg transition ${
+                className={`flex-1 py-2 text-sm rounded-lg transition ${
                   tab === "completed"
                     ? "bg-white shadow font-semibold"
                     : "text-gray-600"
@@ -66,7 +66,7 @@ export default function ReservationItem({ property }) {
               <button
                 type="button"
                 onClick={() => setTab("cancelled")}
-                className={`flex-1 py-2 rounded-lg transition ${
+                className={`flex-1 py-2 text-sm rounded-lg transition ${
                   tab === "cancelled"
                     ? "bg-white shadow font-semibold"
                     : "text-gray-600"
@@ -86,18 +86,17 @@ export default function ReservationItem({ property }) {
                     className="flex justify-between border-t py-2 group"
                   >
                     <div>
-                      <p>
-                        {b.check_in} → {b.check_out}
-                      </p>
+                      <p className="text-sm sm:text-[14px]">{b.check_in} - </p>
+                      <p className="text-sm sm:text-[14px]">{b.check_out}</p>
                       <small className="text-gray-500">
                         Guest: {b.profiles.full_name}
                       </small>
                     </div>
 
-                    <div className="flex items-center gap-2">
+                    <div className="flex flex-col sm:flex-row items-center gap-2">
                       <Link
                         href={`/host/bookings/${b.id}`}
-                        className="px-3 py-1.5 rounded-lg border text-sm hover:bg-gray-50 transition"
+                        className="px-3 py-1.5 rounded-lg border text-sm hover:bg-gray-50 transition sm:text-[14px]"
                       >
                         View Booking
                       </Link>

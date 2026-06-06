@@ -9,12 +9,14 @@ export default function ModalFormField({
 }) {
   return (
     <div>
-      <label htmlFor={id}>{label}</label>
+      <label className="text-sm sm:text-[16px]" htmlFor={id}>
+        {label}
+      </label>
 
       {type === "textarea" ? (
         <textarea
           id={id}
-          className="w-full border p-2 mb-2 rounded"
+          className="w-full border p-2 mb-2 rounded text-sm sm:text-[16px]"
           placeholder={placeholder ?? label}
           value={value ?? ""}
           onChange={onChange}
@@ -22,7 +24,7 @@ export default function ModalFormField({
       ) : (
         <input
           id={id}
-          className="w-full border p-2 mb-2 rounded"
+          className="w-full border p-2 mb-2 rounded text-sm sm:text-[16px]"
           type={type}
           placeholder={placeholder ?? label}
           value={value ?? ""}

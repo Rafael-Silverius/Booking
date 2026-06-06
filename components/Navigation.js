@@ -194,11 +194,6 @@ export default function Navigation() {
               </DropdownMenuItem>
             )}
 
-            <DropdownMenuItem asChild>
-              <Link href="/about" className={navLinkClass("/about")}>
-                <Info size={16} /> About
-              </Link>
-            </DropdownMenuItem>
             {profile?.role !== "host" && (
               <DropdownMenuItem asChild>
                 <Link href="/host" className={navLinkClass("/host")}>
@@ -236,6 +231,11 @@ export default function Navigation() {
                 </Link>
               </DropdownMenuItem>
             )}
+            <DropdownMenuItem asChild>
+              <Link href="/about" className={navLinkClass("/about")}>
+                <Info size={16} /> About
+              </Link>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

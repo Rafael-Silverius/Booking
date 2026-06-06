@@ -15,7 +15,7 @@ export default async function page({ params }) {
   const { data } = await supabase.auth.getClaims();
 
   return (
-    <div className="flex flex-col items-center md:max-w-250 md:mx-auto">
+    <div className="flex flex-col items-center  md:mx-auto">
       {/* Header */}
       <div className="flex flex-col items-center m-5">
         <div className="flex gap-4">
@@ -31,7 +31,7 @@ export default async function page({ params }) {
           )}
         </div>
       </div>
-      <div className="flex flex-col md:grid md:grid-cols-[400px_1fr] gap-6 ">
+      <div className="flex flex-col md:grid lg:grid-cols-[400px_1fr] gap-6 ">
         {/* Left */}
         <div className="flex flex-col gap-4 ">
           <GuestCard guest={booking.profiles} />
