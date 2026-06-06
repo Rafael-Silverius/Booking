@@ -67,18 +67,17 @@ export default function PropertyAvailability({
   }
 
   return (
-    <div className="space-y-4 px-1 py-2">
-      <div>
-        <h3 className="mb-3 text-lg font-semibold">
-          Select from available dates
-        </h3>
-
+    <>
+      <h2 className="text-2xl font-semibold pb-6">
+        Select from available dates
+      </h2>
+      <div className="mb-10 flex flex-col items-center sm:flex-row sm:justify-evenly md:flex-col">
         <Calendar
           mode="range"
           numberOfMonths={1}
           selected={dateRange}
           onSelect={setDateRange}
-          className="rounded-xl border"
+          className="rounded-xl border "
           disabled={[
             {
               before: new Date(),
@@ -86,55 +85,57 @@ export default function PropertyAvailability({
             ...disabledDays,
           ]}
         />
-        <div className="mt-4 space-y-2">
-          <label className="block text-sm font-medium">Number of guests</label>
+        {dateRange?.from && (
+          <>
+            <div className="rounded-md bg-muted text-sm space-y-2">
+              <p>
+                Check-in: <strong>{dateRange.from.toLocaleDateString()}</strong>
+              </p>
 
-          <input
-            type="number"
-            min={1}
-            value={guests}
-            onChange={(e) => setGuests(Number(e.target.value))}
-            className="w-24 rounded-md border px-3 py-2"
-          />
-        </div>
+              {dateRange.to && (
+                <>
+                  <p>
+                    Check-out:{" "}
+                    <strong>{dateRange.to.toLocaleDateString()}</strong>
+                  </p>
+
+                  <p>
+                    Nights: <strong>{nights}</strong>
+                  </p>
+
+                  <p>
+                    €{pricePerNight} × {nights} nights
+                  </p>
+
+                  <p className="text-base font-bold">Total: €{totalPrice}</p>
+                </>
+              )}
+
+              <div className="mt-4 space-y-2">
+                <label className="block text-sm font-medium">
+                  Number of guests
+                </label>
+
+                <input
+                  type="number"
+                  min={1}
+                  value={guests}
+                  onChange={(e) => setGuests(Number(e.target.value))}
+                  className="w-24 rounded-md border px-3 py-2"
+                />
+              </div>
+              {dateRange?.from < dateRange?.to && (
+                <button
+                  onClick={handleReserve}
+                  className="mt-4 w-full rounded-lg bg-black px-4 py-2 text-white hover:bg-black/90"
+                >
+                  Reserve
+                </button>
+              )}
+            </div>
+          </>
+        )}
       </div>
-
-      {dateRange?.from && (
-        <div className="rounded-md bg-muted p-4 text-sm space-y-2">
-          <p>
-            Check-in: <strong>{dateRange.from.toLocaleDateString()}</strong>
-          </p>
-
-          {dateRange?.to && (
-            <>
-              <p>
-                Check-out: <strong>{dateRange.to.toLocaleDateString()}</strong>
-              </p>
-
-              <p>
-                Nights: <strong>{nights}</strong>
-              </p>
-
-              <p>
-                €{pricePerNight} × {nights} nights
-              </p>
-
-              <p className="text-base font-bold">Total: €{totalPrice}</p>
-            </>
-          )}
-
-          <p>
-            Guests: <strong>{guests}</strong>
-          </p>
-        </div>
-      )}
-
-      <button
-        onClick={handleReserve}
-        className="rounded-lg bg-black px-4 py-2 text-white hover:bg-black/90"
-      >
-        Reserve
-      </button>
-    </div>
+    </>
   );
 }

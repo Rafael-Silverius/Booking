@@ -29,10 +29,10 @@ export default function PropertyAmenities({ propertyAmenities }) {
     Garden: Trees,
   };
   return (
-    <div className="pr-20">
+    <div className=" md:pr-20">
       <h2 className="text-2xl font-semibold mb-6">What this place offers</h2>
 
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
         {propertyAmenities.map((item) => {
           const Icon = amenityIcons[item.amenities.name];
 
